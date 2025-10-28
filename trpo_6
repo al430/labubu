@@ -1,0 +1,153 @@
+<Window x:Class="gariev_trpo_5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:gariev_trpo_5"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="600">
+    <StackPanel Orientation="Vertical">
+        <DockPanel LastChildFill="False" Background="#5a819b"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Stretch">
+            <Button Name="main"
+                    Width="100"
+                    Height="25"
+                    Margin="5">
+                Главная
+            </Button>
+            <Button Name="profile"
+                    Width="100"
+                    Height="25"
+                    Margin="5">
+                Профиль
+            </Button>
+            <Button Name="settings"
+                    Width="100"
+                    Height="25"
+                    Margin="5">
+                Настройки
+            </Button>
+            <Button Name="help"
+                    Width="100"
+                    Height="25"
+                    Margin="5">
+                Помощь
+            </Button>
+        </DockPanel>
+        <Grid Margin="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Column="0"
+                    Grid.RowSpan="6"
+                    BorderBrush="Black"
+                    BorderThickness="0.75">
+                <Button Content="Загрузить фото"
+                        Height="20"
+                        Margin="10"
+                        VerticalAlignment="Bottom"/>
+            </Border>
+            <Label Content="ФИО:" 
+                   Grid.Column="1"
+                   Grid.Row="0"
+                   Margin="5, 0, 0, 0"
+                   />
+            <Label Content="Email:" 
+                   Grid.Column="1"
+                   Grid.Row="1"
+                   Margin="5, 10, 0, 0"
+                   />
+            <Label Content="Телефон:" 
+                   Grid.Column="1"
+                   Grid.Row="2"
+                   Margin="5, 10, 0, 0"
+                   />
+            <Label Content="Дата рождения:" 
+                   Grid.Column="1"
+                   Grid.Row="3"
+                   Margin="5, 10, 0, 0"
+                   />
+            <Label Content="Пол:" 
+                   Grid.Column="1"
+                   Grid.Row="4"
+                   Margin="5, 10, 0, 0"
+                   />
+            <Label Content="Пароль:" 
+                   Grid.Column="1"
+                   Grid.Row="5"
+                   Margin="5, 10, 0, 0"
+                   />
+            <TextBox Grid.Column="2"
+                     Grid.Row="0"
+                     />
+            <TextBox Grid.Column="2"
+                     Grid.Row="1"
+                     Margin="0, 10, 0, 0"
+                     />
+            <TextBox Grid.Column="2"
+                     Grid.Row="2"
+                     Margin="0, 10, 0, 0"
+                     />
+            <DatePicker Grid.Column="2"
+                     Grid.Row="3"
+                     Margin="0, 10, 0, 0"
+                     />
+            <StackPanel Grid.Column="2"
+                        Grid.Row="4"
+                        Margin="0, 10, 0, 0"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                     >
+                <RadioButton GroupName="Gender">Мужской</RadioButton>
+                <RadioButton GroupName="Gender" Margin="10, 0, 0, 0">Женский</RadioButton>
+            </StackPanel>
+            <TextBox Grid.Column="2"
+                     Grid.Row="5"
+                     Margin="0, 10, 0, 0"
+                     />
+
+            <StackPanel Grid.Row="6"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Margin="5, 10, 0, 0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Stretch">
+                <Label Content="Подтверждение пароля:"/>
+                <TextBox Width="200"
+                         HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </Grid>
+        <WrapPanel Background="#ffe9f4"
+                   Margin="20, 0, 20, 0"
+                   Height="150">
+            <Label Content="* Пароль должен содержать минимум 8 символов."
+                   Margin="0,5,0,0"/>
+            <Label Content="* Email должен быть в формате name@mail.com."
+                   Margin="0,5,0,0"/>
+            <Label Content="* Все поля обязательны."
+                   Margin="10,5,0,0"/>
+        </WrapPanel>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0, 20, 20,0">
+            <Button Content="Зарегистрироваться"
+                    Width="150"/>
+            <Button Content="Отмена"
+                    Margin="10,0,0,0"
+                    Width="100"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
