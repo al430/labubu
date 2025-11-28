@@ -1,0 +1,144 @@
+// sp_pr_10.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+//
+
+#include <conio.h>
+#include <Windows.h>
+#include <iostream>
+
+volatile long fib_count = 0;
+DWORD WINAPI Fib() {
+	long p2 = 0;
+	long p1 = 1;
+
+	long cur = 2;
+
+
+	while (true) {
+		long temp = cur;
+
+		cur = p1 + p2;
+		p2 = p1;
+		p1 = temp;
+		fib_count++;
+	}
+	return 0;
+}
+
+volatile long fact_count = 0;
+DWORD WINAPI Fact() {
+	long oper = 1;
+	long count = 1;
+
+	while (true) {
+		oper *= count;
+		fact_count++;
+		count++;
+	}
+	return 0;
+}
+
+volatile long inc_count = 0;
+DWORD WINAPI Inc() {
+
+	while (true) {
+		inc_count++;
+	}
+	return 0;
+}
+
+volatile long load_count = 0;
+DWORD WINAPI Load() {
+	long oper = 1;
+
+	while (true) {
+		for (int i = 0; i < 3; i++) {
+			oper = oper << 1;
+		};
+		oper = oper % 1000000009;
+		load_count++;
+	};
+}
+
+void Print(int count, HANDLE handle) {
+	std::cout << count << " " << handle << " " << GetThreadPriority(handle) << "\n";
+}
+
+int main() {
+	HANDLE hFib;
+	DWORD dwFib;
+
+	hFib = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)Fib, 0, 0, &dwFib);
+
+
+	HANDLE hFact;
+	DWORD dwFact;
+
+	hFact = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)Fact, 0, 0, &dwFact);
+
+
+
+	HANDLE hInc;
+	DWORD dwInc;
+
+	hInc = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)Inc, 0, 0, &dwInc);
+
+
+	HANDLE hLoad;
+	DWORD dwLoad;
+
+	bool work = true;
+
+	while (work) {
+		if (_kbhit()) {
+			char ans = _getch();
+
+			switch (ans) {
+			case '1':
+				SetThreadPriority(hFib, -2);
+				break;
+
+			case '2':
+				SetThreadPriority(hFact, THREAD_PRIORITY_HIGHEST);
+				break;
+
+			case '3':
+				SetThreadPriority(hInc, THREAD_PRIORITY_HIGHEST);
+				break;
+
+			case '4':
+				hLoad = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)Load, 0, 0, &dwLoad);
+				SetThreadPriority(hLoad, 2);
+				break;
+
+			case '5':
+				work = false;
+				break;
+			}
+		}
+		
+
+		Print(fib_count, hFib);
+		Print(fact_count, hFact);
+		Print(inc_count, hInc);
+		Print(load_count/100, hLoad);
+		
+		fib_count = 0;
+		fact_count = 0;
+		inc_count = 0;
+		load_count = 0;
+		
+		Sleep(1000);
+		system("cls");
+	}
+}
+
+// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
+// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
+
+// Советы по началу работы 
+//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
+//   2. В окне Team Explorer можно подключиться к системе управления версиями.
+//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
+//   4. В окне "Список ошибок" можно просматривать ошибки.
+//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
+//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
