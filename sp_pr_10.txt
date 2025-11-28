@@ -1,0 +1,89 @@
+#include <Windows.h>
+#include <iostream>
+
+DWORD WINAPI Fib() {
+	long count = 0;
+}
+
+DWORD WINAPI Fact() {
+	long count = 0;
+}
+
+DWORD WINAPI Inc() {
+	long count = 0;
+}
+
+DWORD WINAPI Load() {
+	long count = 0;
+	long oper;
+	
+	while (true) {
+		for (int i = 0; i<3; i++) {
+			oper = oper<<1;
+		};
+		oper = oper%1000000009;
+	};
+}
+
+DWORD WINAPI Print() {
+	
+}
+
+int main() {
+	HANDLE hFib;
+	DWORD dwFib;
+	
+	hFib = CreateThread(NULL, 0, Fib, void, 0, &dwFib);
+	SetThreadPriority(hFib, IDLE_PRIORITY_CLASS);
+	
+
+	HANDLE hFact;
+	DWORD dwFact;
+	
+	hFact = CreateThread(NULL, 0, Fact, void, 0, &dwFact);
+	SetThreadPriority(hFact, BELOW_NORMAL_PRIORITY_CLASS);
+
+
+	HANDLE hInc;
+	DWORD dwInc;
+	
+	hInc = CreateThread(NULL, 0, Inc, void, 0, &dwInc);
+	SetThreadPriority(hInc, THREAD_PRIORITY_NORMAL);
+
+	HANDLE hInc;
+	DWORD dwInc;
+	
+	hInc = CreateThread(NULL, 0, Inc, void, 0, &dwInc);
+	SetThreadPriority(hInc, THREAD_PRIORITY_TIME_CRITICAL);
+
+
+
+	bool work = true;
+	char ans;
+	while (work) {
+		ans = _getch();
+
+		swith(ans) {
+			case '1':
+				SetThreadPriority(hFib, THREAD_PRIORITY_HIGHEST);
+				break;
+
+			case '2':
+				SetThreadPriority(hFact, THREAD_PRIORITY_HIGHEST);
+				break;
+
+			case '3':
+				SetThreadPriority(hInc, THREAD_PRIORITY_HIGHEST);
+				break;
+
+			case '4':
+				SetThreadPriority(hInc, THREAD_PRIORITY_HIGHEST);
+				break;
+
+			case '5':
+				work = false;
+				break;
+				
+		}		
+	}
+}
